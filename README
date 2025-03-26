@@ -1,15 +1,47 @@
 Math-Symbolic-Custom-ToTallString
 
-The README is used to introduce the module and provide instructions on
-how to install the module, any machine dependencies it may have (for
-example C compilers and installed libraries) and any other information
-that should be provided before the module is installed.
+Provides to_tall_string() through the Math::Symbolic module extension class. Large Math::Symbolic expressions can sometimes be difficult to read when displayed with to_string() and to_shorter_infix_string() (from Math::Symbolic::Custom::ToShorterString). The primary obstacles are the division and exponent operators, so to_tall_string() will compose numerator and denominator onto different lines of output and will put exponents on the line above in an attempt to improve readability. See the examples above. Note that unlike to_shorter_infix_string() the output from to_tall_string() is in no way compatible with the Math::Symbolic parser.
 
-A README file is required for CPAN modules since CPAN extracts the README
-file from a module distribution so that people browsing the archive
-can use it to get an idea of the module's uses. It is usually a good idea
-to provide version information here so that people can decide whether
-fixes for the module are worth downloading.
+to_tall_string() accepts one optional parameter, the number of spaces to indent the returned string block.
+
+EXAMPLES
+
+use strict;
+use Math::Symbolic 0.613 qw(:all);
+use Math::Symbolic::Custom::ToTallString;
+
+my $example1 = "x / 5";
+print parse_from_string($example1)->to_tall_string(), "\n\n";
+
+#  x 
+# ---
+#  5 
+
+my $example2 = "(sin((1 / x) - (1 / y))) / (x + y)";
+print parse_from_string($example2)->to_tall_string(), "\n\n";
+
+#     ( 1     1 ) 
+#  sin(--- - ---) 
+#     ( x     y ) 
+# ----------------
+#      x + y      
+
+my $example3 = "K + (K * ((1 - exp(-2 * K * t))/(1 + exp(-2 * K * t))) )";
+print parse_from_string($example3)->to_tall_string(10), "\n\n";
+
+#               (           (-2*K*t) )
+#               (     1 - e^         )
+#           K + (K * ----------------)
+#               (           (-2*K*t) )
+#               (     1 + e^         )
+
+my $example4 = "((e^x) + (e^-x))/2";
+print parse_from_string($example4)->to_tall_string(3), "\n\n";
+
+#       x     -x 
+#     e^  + e^   
+#    ------------
+#         2     
 
 
 INSTALLATION

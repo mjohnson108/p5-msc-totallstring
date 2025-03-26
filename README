@@ -1,6 +1,7 @@
-Math-Symbolic-Custom-ToTallString
+Math::Symbolic::Custom::ToTallString
+====================================
 
-Provides to_tall_string() through the Math::Symbolic module extension class. Large Math::Symbolic expressions can sometimes be difficult to read when displayed with to_string() and to_shorter_infix_string() (from Math::Symbolic::Custom::ToShorterString). The primary obstacles are the division and exponent operators, so to_tall_string() will compose numerator and denominator onto different lines of output and will put exponents on the line above in an attempt to improve readability. See the examples above. Note that unlike to_shorter_infix_string() the output from to_tall_string() is in no way compatible with the Math::Symbolic parser.
+Provides to_tall_string() through the Math::Symbolic module extension class. Large Math::Symbolic expressions can sometimes be difficult to read when displayed with to_string() and to_shorter_infix_string() (from Math::Symbolic::Custom::ToShorterString). The primary obstacles are the division and exponent operators, so to_tall_string() will compose numerator and denominator onto different lines of output and will put exponents on the line above in an attempt to improve readability. See the examples. Note that unlike to_shorter_infix_string() the output from to_tall_string() is in no way compatible with the Math::Symbolic parser.
 
 to_tall_string() accepts one optional parameter, the number of spaces to indent the returned string block.
 

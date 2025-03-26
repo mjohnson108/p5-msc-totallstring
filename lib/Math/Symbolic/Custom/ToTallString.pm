@@ -383,7 +383,6 @@ sub _compose_dual {
         if ( _is_all_operator($t, B_PRODUCT) || _is_all_operator($t, B_SUM) ) {
             $brackets_on_2 = 0;
         }
-        # "expanded" for a simple expression essentially defined as no +/- below a * in the tree
         if ( _is_all_operator($t, [B_SUM, B_DIFFERENCE, B_PRODUCT, U_MINUS, B_EXP]) && _is_expanded($t) ) {
             $brackets_on_2 = 0;
         }
@@ -488,9 +487,7 @@ sub _compose_dual {
 }
 
 ### These routines duplicated from ToShorterString.pm
-# _is_all_operator
-# returns 1 if the passed in tree $t is comprised entirely of the
-# operator(s) specified in $op_type (excluding prefix-only operators)
+
 sub _is_all_operator {
     my ($t, $op_type) = @_;
     
@@ -515,10 +512,6 @@ sub _is_all_operator {
     return $ok;
 }
 
-# _is_expanded
-# returns 1 if there are no +/- below a * in the tree.
-# FIXME: Cannot really be run by itself - has to be restricted to the operators involved, i.e.:
-# _is_all_operator($t, [B_SUM, B_DIFFERENCE, B_PRODUCT]) && _is_expanded($t)
 sub _is_expanded {
     my ($t, $flag) = @_;
     
